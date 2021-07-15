@@ -1,7 +1,12 @@
 extends layout
 
 block content 
-  h1 Ops Count 
-  ul
+  h1 Ops Type Count 
+  table(width='100%', border='1')
+    tr 
+      th Operation Type 
+      th Operation Count
     each val, key in opCount 
-      li= key + ': ' + val
+      tr 
+        td= key 
+        td= val

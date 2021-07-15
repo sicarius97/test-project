@@ -31,6 +31,8 @@ const transactSchema = new mongoose.Schema({
 
 let transactions = []
 
+transaction_full = []
+
 let opCounter = {}
 
 
@@ -52,6 +54,14 @@ function onOperation(op, block_num, block_id, previous, transaction_id, block_ti
 	opCounter[op[1].id] += 1;
 	// For each unique player operation, and count to total operations for that player
 	// player.counter[op[1].required_posting_auths[0]] += 1; 
+	let transaction = {
+		op: op,
+		block_num: block_num,
+		block_id: block_id,
+		transaction_id: transaction_id,
+		block_time: block_time
+	}
+	transaction_full.push(transaction);
 	transactions.push(op);
 }
 
