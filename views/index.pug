@@ -2,4 +2,10 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #{title} on Express
+  p To navigate, click a link below 
+  p A search for a list of specific player operations 
+  | is provided on the players page
+  ul(class='nav') 
+    li: a(href='/players') Player Operations 
+    li: a(href='/operations') Operations Count

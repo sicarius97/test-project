@@ -12,6 +12,7 @@ const playersRouter = require('./routes/players');
 const usersRouter = require('./routes/users');
 
 const app = express();
+
 /*
 //Set up default mongoose connection
 const mongoDB = 'mongodb://127.0.0.1/my_database';
@@ -29,11 +30,11 @@ const transactSchema = new mongoose.Schema({
 })
 */
 
+// Probably cleaner to store transactions long term with a database and use queries
+// This serves its purpose as an example where there is no saved state of streamed transactions
 let transactions = []
 
-transaction_full = []
 
-let opCounter = {}
 
 
 // Stream for hive transactions
@@ -50,10 +51,8 @@ function onOperation(op, block_num, block_id, previous, transaction_id, block_ti
 		return;
 
 	console.log(`Received operation: ${JSON.stringify(op)}`);
-	// For each operation type, increment counter in opCounter object
-	opCounter[op[1].id] += 1;
-	// For each unique player operation, and count to total operations for that player
-	// player.counter[op[1].required_posting_auths[0]] += 1; 
+	
+	// create transaction object for incoming transactions
 	let transaction = {
 		op: op,
 		block_num: block_num,
@@ -61,8 +60,8 @@ function onOperation(op, block_num, block_id, previous, transaction_id, block_ti
 		transaction_id: transaction_id,
 		block_time: block_time
 	}
-	transaction_full.push(transaction);
-	transactions.push(op);
+	//store transaction object in array
+	transactions.push(transaction);
 }
 
 

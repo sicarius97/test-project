@@ -10,10 +10,10 @@ router.get('/', function(req, res, next){
     let opCounter = {}
 
     for (let i = 0; i < transactions.length; i++){
-        if (!Object.keys(opCounter).includes(transactions[i][1].id)) {
-            opCounter[transactions[i][1].id] = 0
+        if (!Object.keys(opCounter).includes(transactions[i].op[1].id)) {
+            opCounter[transactions[i].op[1].id] = 0
         } 
-        opCounter[transactions[i][1].id] += 1
+        opCounter[transactions[i].op[1].id] += 1
     }
     console.log(opCounter)
     res.render('ops', {opCount: opCounter});
