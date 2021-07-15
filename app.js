@@ -1,27 +1,38 @@
 const config = require('./config');
 const { Hive } = require('@splinterlands/hive-interface');
 const express = require('express')
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
-var opsRouter = require('./routes/ops');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const opsRouter = require('./routes/ops');
+const playersRouter = require('./routes/players');
+const usersRouter = require('./routes/users');
 
-var app = express();
-// Construct empty objects for counts (could probably be done cleaner, serves purpose for now)
+const app = express();
+/*
+//Set up default mongoose connection
+const mongoDB = 'mongodb://127.0.0.1/my_database';
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
-// Operation counter object
+//Get the default connection
+const db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+const transactSchema = new mongoose.Schema({
+	operation: String,
+
+})
+*/
+
+let transactions = []
+
 let opCounter = {}
 
-// Player counter object
-let player = {
-	counter: {},
-	search: function () {
-		return;
-	}
-}
 
 // Stream for hive transactions
 const hive = new Hive();
@@ -40,9 +51,11 @@ function onOperation(op, block_num, block_id, previous, transaction_id, block_ti
 	// For each operation type, increment counter in opCounter object
 	opCounter[op[1].id] += 1;
 	// For each unique player operation, and count to total operations for that player
-	player.counter[op[1].required_posting_auths[0]] += 1; 
-
+	// player.counter[op[1].required_posting_auths[0]] += 1; 
+	transactions.push(op);
 }
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,12 +66,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.locals.transactions = transactions;
 
 app.use('/', indexRouter);
 app.use('/ops', opsRouter);
 app.use('/users', usersRouter);
+app.use('/players', playersRouter);
 
-// Middleware to 
+// Set local res variables to be accessed in views when a request is submitted
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
