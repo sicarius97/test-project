@@ -1,0 +1,15 @@
+extends layout
+
+block content 
+  h1 Player Ops Count 
+  form(action='/players/search')
+    input(type='text', id='query', name='q', placeholder='Search...')
+    input(type='submit', value='Search')
+  table
+    tr
+      th Player 
+      th Ops Count 
+    each val, key in playersCount
+      tr 
+        td= key 
+        td= val
