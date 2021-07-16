@@ -1,10 +1,12 @@
 extends layout
 
 block content 
-  h1 Player Ops Count 
-  form(action='/players/search')
-    input(type='text', id='query', name='q', placeholder='Search...')
-    input(type='submit', value='Search')
+  h1 Player Ops Count
+  div 
+    form(action='/players/search')
+      input(type='text', id='query', name='q', placeholder='Search...')
+      input(type='submit', value='Search')
+    button(type='button', onclick='refresh()', value='Refresh', name='refresh', id='refresh') Refresh
   table
     tr
       th Player 
@@ -13,3 +15,7 @@ block content
       tr 
         td= key 
         td= val
+  script. 
+    function refresh(){
+      window.location.reload(true)
+    }
