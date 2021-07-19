@@ -42,7 +42,12 @@ router.get('/', function (req, res, next){
 router.get('/search', function (req, res, next){
     const player = req.query.q
     let data = res.locals.players[player]
-    res.send(data)
+    let stringifiedData = []
+    
+    data.forEach(item => {
+        stringifiedData.push(JSON.stringify(item));
+    })
+    res.render('playeropsearch', {data: stringifiedData, player: player})
 })
 
 module.exports = router;

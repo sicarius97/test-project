@@ -1,0 +1,10 @@
+extends layout 
+
+block content
+  h1.page-title Blockchain operations for #{player}
+  table.ops-table 
+    tr 
+      th Operations 
+    each item in data 
+      tr 
+        td= item

@@ -1,20 +1,100 @@
 body {
-  padding: 50px;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color:goldenrod;
 }
 
 table {
-  width: 100%;
+  width: 50%;
+  margin: auto;
 }
 
 table, th, td {
   border: 1px solid black;
 }
 
-.nav {
-  font-size: 32px;
+header {
+  background-color: darkslategray;
+  color:floralwhite;
+  width: 100%;
+  margin:0 auto;
+}
+
+nav {
+  background-color:darkslategray;
+  color:floralwhite;
+  flex-basis: 100%;
+}
+
+.navlist {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.navlist > li {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 26px;
+}
+
+.page-title {
+  flex-basis: 100%;
+  text-align: center;
+}
+
+.ops-table {
+  width: 50%;
+  margin: auto;
+}
+
+.ops-table > td {
+  height: auto;
+}
+
+.page-search {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+#header-text {
+  font-size: 36px;
+  text-align: center;
+}
+
+#top-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#main-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+#refresh {
+  text-align: center;
+  background: darkblue;
+  color: white;
+  font-size: 26px;
+  padding: 10px, 5px;
+  margin: 0 auto 5px;
+
+}
+
+#query {
+  width: 300px;
+  margin: auto;
+}
+
+#introduction {
+  text-align: center;
+  font-size: 18px;
 }

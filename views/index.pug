@@ -1,11 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title} on Express
-  p To navigate, click a link below 
-  p A search for a list of specific player operations 
-  | is provided on the players page
-  ul(class='nav') 
-    li: a(href='/players') Player Operations 
-    li: a(href='/ops') Operations Count
+  h1.page-title= title
+  div#introduction
+    h2 Hello Matt and other testers! 
+    h3 Welcome to the Splinter Test on express
+    p
+    | The goal of this project was to create a web app with the ability to watch 
+    | a Splinterlands stream and perform actions as per the requirements in the Readme.
+    br
+    | Feel free to navigate the site at your leisure, a navbar has been provided at 
+    | the top of this page for your convenience.

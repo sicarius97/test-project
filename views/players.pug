@@ -1,11 +1,11 @@
 extends layout
 
 block content 
-  h1 Player Ops Count
-  div 
+  h1.page-title Player Ops Count
+  div.page-search 
     form(action='/players/search')
-      input(type='text', id='query', name='q', placeholder='Search...')
-      input(type='submit', value='Search')
+      p: input(type='text', id='query', name='q', placeholder='Search...')
+      p: input(type='submit', value='Search', id='search-subit')
     button(type='button', onclick='refresh()', value='Refresh', name='refresh', id='refresh') Refresh
   table
     tr
